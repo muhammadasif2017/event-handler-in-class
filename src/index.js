@@ -1,17 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import bulbOn from './pic_bulbon.gif';
+import bulbOff from './pic_bulboff.gif';
+class House extends React.Component {
+  state = {
+    rooms: {
+      kitchen: true,
+      bathroom: false,
+      livingRoom: true,
+      bedroom: false,
+      isLightOn: false,
+    }
+  };
+  handleLight = () => {
+    this.setState({ rooms: { isLightOn: !this.state.rooms.isLightOn }})
+  }
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  render() {
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+    return (
+      <div>
+        <div>
+          <button onClick={this.handleLight}>Room 1</button>
+        </div>
+        <div>
+          <button onClick={this.handleLight}>Room 2</button>
+        </div>
+        <div>
+          <button onClick={this.handleLight}>Room 3</button>
+        </div>
+        <div>
+          <button onClick={this.handleLight}>Room 4</button>
+        </div>
+        <div>
+          { 
+            this.state.rooms.isLightOn ? <img alt='Light On bulb' src={bulbOn} />
+            : <img alt='Light Off Bulb' src={bulbOff} />
+          }
+        </div>
+
+      </div>
+      
+    )
+  }
+}
+
+ReactDOM.render(<House />, document.querySelector('#root'));
